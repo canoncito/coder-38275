@@ -1,71 +1,37 @@
-/* 
-* Este algoritmo se encarga de mostrar el menu y solicitar el producto que desea comprar
-Si el usuario ingresa 3 productos o mas para comprar el envio es gratuito, de lo contrario
-se le suma 799,99 por gastos en el envio.
-*/
-
-function freeShipping(cantProduct, priceProduct){
-    if (cantProduct >= 3 ){ 
-            let total = cantProduct * priceProduct;
-                    /* Creo una alerta donde avisa que el envio es gratuito*/
-                    alert('Por su compra tiene el envio gratuito a su domicilio');
-                    alert('El precio del producto es de: ' + total);
-                }
-    else
-    {
-        let priceShipping = parseFloat(799.99);
-        let total = parseFloat(priceShipping + (priceProduct * cantProduct));
-        alert('Al valor del producto hay que sumarle un total por el envio de $799.99')
-        alert('El valor total del producto es: ' + total)
-    }
-    return total;
-}
-
- function showPrice(total){ //muestra el total del producto
-     alert('El total que deberia abonar es de : '+ total);
- }
-
-function showMenu(menu){ // muestra el menú
-    let options = prompt('Seleccione el producto que desea comprar. (EXIT) para salir \n 1. Disco SSD 480 gb KINGSTONG - $4570,49\n 2. Monitor 144h gigabyte ga-27m - $55,680 \n 3. Mother msi 360m-ga 1151 - $25,950');
-    return options;
-}
-
-function quotation(){ //cotizamos los productos
-    let selectedOption = showMenu(); 
-    while(selectedOption !== 'EXIT'){
-        if(!isNaN(selectedOption !== '')){
-            let cantProduct = parseInt(prompt('Ingrese la cantidad de producto'));
-                if (cantProduct <= 0){
-                    alert('No se puede vender el producto si la cantidad es menor a 1');
-                }
-                selectedOption = parseInt(selectedOption);
-                 //Switch seleccionar la opción
-                
-                switch(selectedOption){
-                    case 1: // producto 1
-                        let priceProduct = parseFloat(4570.49);
-                        let totalOne = freeShipping(cantProduct, priceProduct);
-                        showPrice(totalOne);
-                        break;
-                    case 2: // producto 2
-                        let priceProduct2 = parseFloat(55680);
-                        let totalTwo = freeShipping(cantProduct, priceProduct2);
-                        showPrice(totalTwo);
-                        break;
-                    case 2: // producto 3
-                        let priceProduct3 = parseFloat(25950);
-                        let totalThree = freeShipping(cantProduct, priceProduct3);
-                        showPrice(totalThree);
-                        break;
-                        default:
-                        alert('Opción no válida');
-                        break;
-                }
-        }else{
-            alert('Seleccione una opción válida');
+/* La clase productosInventario crea objetos los cuales tiene laS propiedades id,
+producto, precio, y tienda. */
+class productosInventario {
+    constructor(id, producto, precio, tienda) {
+        this.id = id
+        this.producto = producto.toUpperCase()
+        this.precio = precio
+        this.tienda = tienda
         }
-        selectedOption = showMenu();   
-    }
 }
-/* Llamando a la función principal. */
-quotation();
+
+const productoN = []
+function agregarInventario() {
+    productoN.push(new  productosInventario(001, "auriculares",  24500, "fullhard"))
+    productoN.push(new  productosInventario(002, "computadora", 185250, "mexx"))
+    productoN.push(new  productosInventario(003, "mouse", 17000, "mexx"))
+    productoN.push(new  productosInventario(004, "camara", 6500, "compragamer"))
+    productoN.push(new  productosInventario(005, "parlantes", 2300, "venex"))
+    productoN.push(new  productosInventario(006, "monitor", 55000, "compragamer"))
+    productoN.push(new  productosInventario(007, "teclado", 13500, "comrpragamer"))
+    } 
+
+    agregarInventario();
+    function recorrerInventario() {
+        productoN.forEach(element => {
+            console.table(element)
+        })
+    }
+alert("Mmsystem la tienda Online mas grande de la Argentina")
+
+/* Le pregunta al usuario el nombre del producto y luego gracias a filter lo que hara sera filtrar en el array de productos hasta encontrar el producto que coincida con lo que el usuario escribio */
+pedido = prompt("Que producto te interesa comprar?  \n Los siguientes son los productos con los que contamos \naudifonos \ncomputadora \nmouse \ncamara \nsensor \ndron \nteclado").toUpperCase()
+let buscar = productoN.filter(el => el.producto.includes(pedido))   
+
+alert("Perfecto, a continuación te diremos cual es el Producto de tu eleccion, Precio y en que tienda fisica puedes encontrar nuestro producto")    
+alert(`El producto elegido es: \n ${buscar[0].id}.-${buscar[0].producto} con un precio de $${buscar[0].precio} ARS y contamos con este producto en la tienda fisca de ${buscar[0].tienda}`)
+alert(`Gracias por elegirnos.`)
