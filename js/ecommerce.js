@@ -33,5 +33,5 @@ pedido = prompt("Que producto te interesa comprar?  \n Los siguientes son los pr
 let buscar = productoN.filter(el => el.producto.includes(pedido))   
 
 alert("Perfecto, a continuación te diremos cual es el Producto de tu eleccion, Precio y en que tienda fisica puedes encontrar nuestro producto")    
-alert(`El producto elegido es: \n ${buscar[0].id}.-${buscar[0].producto} con un precio de $${buscar[0].precio} ARS y contamos con este producto en la tienda fisca de ${buscar[0].tienda}`)
+alert(`El producto elegido es: \n ${buscar[0].id}.-${buscar[0].producto} con un precio de $${buscar[0].precio} ARS y contamos con este producto en la tienda fisica de ${buscar[0].tienda}`)
 alert(`Gracias por elegirnos.`)
